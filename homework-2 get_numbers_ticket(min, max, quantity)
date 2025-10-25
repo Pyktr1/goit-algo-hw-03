@@ -1,0 +1,42 @@
+import random
+
+#Читати з верху до низу
+
+#Імпортуємо random
+
+#Створюємо функцію get_numbers_ticket
+
+def get_numbers_ticket(min, max, quantity):
+    try:
+
+        #Використовуэму try expect для перевірок на помилки 
+
+        # Перетворення вхідних параметрів на int
+        min = int(min)
+        max = int(max)
+        quantity = int(quantity)
+        
+        # Якщо мінімум більше 1 чи максимуи менше 100 чи кількість більше 1 чи кількість менше за максимум - мінімум + 1
+        if min < 1 or max > 1000 or quantity < 1 or quantity > (max - min + 1):
+            raise ValueError("Невірні параметри")  # Викликаємо помилку вручну якщо умови не виконуються
+        
+        # Генерація унікальних чисел за допомогою random.sample
+        lottery_numbers = random.sample(range(min, max + 1), quantity)
+        
+        # #lottery_numbers.sort() сортує номера по зростанню, на кшталт 1, 12, 22.
+        lottery_numbers.sort()
+        
+        #повертаємо lottery_numbers
+        return lottery_numbers
+    
+    except ValueError:
+        print("Помилка! Невірні параметри.")
+        return []  # Повертаємо порожні душки при помилці
+    
+    except Exception:
+        print("Невідома помилка!")
+        return []  # Повертаємо порожні душки при інших помилках
+
+# Виклик функції
+lottery_numbers = get_numbers_ticket(1, 49, 6)
+print("Ваші лотерейні числа:", lottery_numbers)
